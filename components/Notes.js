@@ -1,20 +1,37 @@
-import React from 'react';
-import { Dimensions, View, StyleSheet, Text } from "react-native";
+import React, { useEffect, useRef } from 'react';
+import { Dimensions, View, StyleSheet, Text, Animated } from "react-native";
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 const noteWidth = (width - 60) / 2;
 
-const Notes = ({title,content,color = '#f8f9fa'}) => {
-    return(
-        <View style = {[styles.noteContainer, {backgroundColor : color, width: noteWidth}]}>
-            <Text style = {styles.noteTitle}>{title}</Text>
-            <Text style = {styles.noteContent}>{content}</Text>
+const Notes = ({ title, content, color = '#f8f9fa' }) => {
+    const opacity = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        Animated.timing(opacity, {
+            toValue: 1,
+            duration: 800,
+            useNativeDriver: true,
+        }).start();
+    }, []);
+
+    // Trim content to first 35 characters
+    const trimmedContent = content.length > 35 ? content.slice(0, 35) + '...' : content;
+
+    return (
+        <View style={[styles.noteContainer, { backgroundColor: color, width: noteWidth }]}>
+            <Animated.Text style={[styles.noteTitle, { opacity }]}>
+                {title}
+            </Animated.Text>
+            <Animated.Text style={[styles.noteContent, { opacity }]}>
+                {trimmedContent}
+            </Animated.Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    noteContainer : {
+    noteContainer: {
         padding: 15,
         borderRadius: 12,
         marginBottom: 15,
