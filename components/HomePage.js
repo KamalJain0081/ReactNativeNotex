@@ -8,9 +8,10 @@ const HomePage = () => {
         <SafeAreaView style = {styles.container}>
             <Header />
             <ScrollView
-                style = {styles.content}
-                showsVerticalScrollIndicator={false}
-            >
+    style={styles.content}
+    contentContainerStyle={{ flexGrow: 1, alignItems: 'stretch' }}
+    showsVerticalScrollIndicator={false}
+>
                 {/* The Main Body Content*/}
                 <MainBody/>
             </ScrollView>
@@ -21,6 +22,7 @@ const HomePage = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%',
         backgroundColor: '#ffffff'
     },
     content: {

@@ -19,7 +19,7 @@ const Header = () => {
         <View style={styles.header}>
             <Text style={styles.logo}>NoteX</Text>
             <TouchableOpacity onPress={handleProfileClick}>
-                <FontAwesome name="user" size={26} color="#333" />
+                <FontAwesome name="user" size={26} color="#fff" />
             </TouchableOpacity>
         </View>
     );
@@ -28,14 +28,13 @@ const Header = () => {
 const styles = StyleSheet.create({
     header:{
         marginTop:38,
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        backgroundColor: '#ffffff',
+        paddingHorizontal: 25,
+        paddingVertical: 13,
+        backgroundColor: '#565555ff',
         borderBottomWidth: 1,
         borderBottomColor: '#e0e0e0',
         borderTopWidth: 1,
         borderTopColor: '#e0e0e0',
-        // alignItems: 'left'
          flexDirection: 'row',              // row layout
         justifyContent: 'space-between',   // space between logo & icon
         alignItems: 'center' 
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     logo: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#333333',
+        color: '#fff',
         paddingHorizontal: 10
     }
 });
