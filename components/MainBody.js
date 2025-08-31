@@ -23,7 +23,7 @@ const MainBody = () => {
         
         {
             id: 1,
-            title: "Meeting Notes",
+            title: "Meeting Notes about Raindeer",
             content: "Discuss project timeline and deliverables for Q4. Need to follow up with team lead.",
             color: '#fff2cc',
             isPrivate: false,
@@ -51,14 +51,14 @@ const MainBody = () => {
         },
         {
             id: 5,
-            title: "Code Review",
+            title: "Code Review for Parth ",
             content: "Check authentication logic, optimize database queries, update documentation",
             color: '#e2e3e5',
             isPrivate: false,
         },
         {
             id: 6,
-            title: "Quick Reminder",
+            title: "Quick Reminder for my upcoming projects",
             content: "Call dentist",
             color: '#fff3cd',
             isPrivate: true,
@@ -98,6 +98,34 @@ const MainBody = () => {
             color: '#e0ffff',
             isPrivate: false,
         },
+        {
+            id: 12,
+            title: "Book Ideas for reading",
+            content: "The Power of Habit - Charles Duhigg\nAtomic Habits - James Clear\nMindset - Carol Dweck\n\nAll about building better habits and mindset",
+            color: '#f8d7da',
+            isPrivate: false,
+        },
+        {
+            id: 13,
+            title: "Weekend Plans with friends",
+            content: "Visit the new art gallery downtown, lunch with friends, grocery shopping",
+            color: '#d1ecf1',
+            isPrivate: true,
+        },
+        {
+            id: 14,
+            title: "Code Review",
+            content: "Check authentication logic, optimize database queries, update documentation",
+            color: '#e2e3e5',
+            isPrivate: false,
+        },
+        {
+            id: 15,
+            title: "Quick Reminder for my latest Projects",
+            content: "Call dentist",
+            color: '#fff3cd',
+            isPrivate: true,
+        }
     ];
 
     useEffect(() => {
@@ -117,9 +145,9 @@ const MainBody = () => {
 
     // Filter and split notes into columns based on viewMode
     const createBrickLayout = () => {
-        const filteredNotes = notesData.filter(note =>
-            viewMode === 'public' ? !note.isPrivate : note.isPrivate
-        );
+        const filteredNotes = notesData
+        .filter(note => viewMode === 'public' ? !note.isPrivate : note.isPrivate)
+        .reverse();
 
         const leftColumns = [];
         const rightColumns = [];
