@@ -2,14 +2,25 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity,
+    Alert
 } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 
 const Header = () => {
+
+    const handleProfileClick = () => {
+        Alert.alert("Profile", "User profile clicked!");
+    };
+
     return (
         <View style={styles.header}>
             <Text style={styles.logo}>NoteX</Text>
+            <TouchableOpacity onPress={handleProfileClick}>
+                <FontAwesome name="user" size={26} color="#333" />
+            </TouchableOpacity>
         </View>
     );
 };
@@ -24,7 +35,10 @@ const styles = StyleSheet.create({
         borderBottomColor: '#e0e0e0',
         borderTopWidth: 1,
         borderTopColor: '#e0e0e0',
-        alignItems: 'left'
+        // alignItems: 'left'
+         flexDirection: 'row',              // row layout
+        justifyContent: 'space-between',   // space between logo & icon
+        alignItems: 'center' 
     },
     logo: {
         fontSize: 24,
