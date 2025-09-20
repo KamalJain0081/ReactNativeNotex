@@ -8,8 +8,7 @@ import {
 import Notes from './Notes';
 import ViewToggle from './ViewToggle';
 
-const MainBody = () => {
-    const [viewMode, setViewMode] = useState('public');
+const MainBody = ({viewMode, setViewMode}) => {
     const bgAnimation = useRef(new Animated.Value(0)).current;
 
     // Animation values for each note fade
@@ -194,55 +193,62 @@ const MainBody = () => {
     }, [leftColumns.length, rightColumns.length]);
 
     return (
-        <Animated.View style={[styles.container]}>
-            <View style={styles.bodyWrapper}>
-                <View style={styles.toggleWrapper}>
-                    <ViewToggle mode={viewMode} onToggle={setViewMode} />
+        <View style={styles.container}>
+            <Animated.View style={[styles.contentContainer,{backgroundColor }]}>
+                <View style={styles.bodyWrapper}>
+                    <View style={styles.toggleWrapper}>
+                        <ViewToggle mode={viewMode} onToggle={setViewMode} />
+                    </View>
+
+                    <ScrollView
+                        style={styles.scroll}
+                        contentContainerStyle={styles.columnsContainers}
+                        showsVerticalScrollIndicator={false}
+                    >
+                        {/* Left Column */}
+                        <View style={styles.column}>
+                            {leftColumns.map((note, index) => (
+                                <Animated.View
+                                    key={note.id}
+                                    style={{ opacity: fadeAnimationsLeft.current[index] }}
+                                >
+                                    <Notes
+                                        title={note.title}
+                                        content={note.content}
+                                        color={note.color}
+                                    />
+                                </Animated.View>
+                            ))}
+                        </View>
+
+                        {/* Right Column */}
+                        <View style={styles.column}>
+                            {rightColumns.map((note, index) => (
+                                <Animated.View
+                                    key={note.id}
+                                    style={{ opacity: fadeAnimationsRight.current[index] }}
+                                >
+                                    <Notes
+                                        title={note.title}
+                                        content={note.content}
+                                        color={note.color}
+                                    />
+                                </Animated.View>
+                            ))}
+                        </View>
+                    </ScrollView>
                 </View>
-
-                <ScrollView
-                    style={styles.scroll}
-                    contentContainerStyle={styles.columnsContainers}
-                >
-                    {/* Left Column */}
-                    <View style={styles.column}>
-                        {leftColumns.map((note, index) => (
-                            <Animated.View
-                                key={note.id}
-                                style={{ opacity: fadeAnimationsLeft.current[index] }}
-                            >
-                                <Notes
-                                    title={note.title}
-                                    content={note.content}
-                                    color={note.color}
-                                />
-                            </Animated.View>
-                        ))}
-                    </View>
-
-                    {/* Right Column */}
-                    <View style={styles.column}>
-                        {rightColumns.map((note, index) => (
-                            <Animated.View
-                                key={note.id}
-                                style={{ opacity: fadeAnimationsRight.current[index] }}
-                            >
-                                <Notes
-                                    title={note.title}
-                                    content={note.content}
-                                    color={note.color}
-                                />
-                            </Animated.View>
-                        ))}
-                    </View>
-                </ScrollView>
-            </View>
-        </Animated.View>
+            </Animated.View>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        position: 'relative',
+    },
+    contentContainer: {
         flex: 1,
     },
     bodyWrapper: {
